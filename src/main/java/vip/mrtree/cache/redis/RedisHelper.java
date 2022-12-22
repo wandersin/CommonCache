@@ -27,7 +27,7 @@ public class RedisHelper implements CacheHelper {
     @Override
     public void put(String cacheName, String key, Object value, long duration) {
         RBucket<Object> bucket = redissonClient.getBucket(generateCacheKey(cacheName, key));
-        bucket.set(value, DEFAULT_CACHE_CYCLE, TimeUnit.SECONDS);
+        bucket.set(value, duration, TimeUnit.SECONDS);
     }
 
     @Override
