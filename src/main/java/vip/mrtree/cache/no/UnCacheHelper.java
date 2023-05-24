@@ -1,5 +1,6 @@
 package vip.mrtree.cache.no;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
@@ -11,12 +12,12 @@ import vip.mrtree.cache.interfact.CacheHelper;
 public class UnCacheHelper implements CacheHelper {
 
     @Override
-    public void put(String cacheName, String key, Object value) {
+    public void put(String cacheName, String key, @NotNull Object value) {
 
     }
 
     @Override
-    public void put(String cacheName, String key, Object value, long duration) {
+    public void put(String cacheName, String key, @NotNull Object value, long duration) {
 
     }
 
@@ -26,7 +27,7 @@ public class UnCacheHelper implements CacheHelper {
     }
 
     @Override
-    public <T> T get(String cacheName, String key, Class<T> tClass) {
+    public <T> T get(String cacheName, String key, @NotNull Class<T> tClass) {
         return null;
     }
 

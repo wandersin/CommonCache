@@ -9,13 +9,13 @@
     <version>${common-cache.version}</version>
 
     <properties>
-        <common-cache.version>v0.0.2-SNAPSHOT</common-cache.version>
+        <common-cache.version>v1.1.0</common-cache.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <redisson-spring-boot-starter.version>3.17.5</redisson-spring-boot-starter.version>
-        <spring-boot-starter-validation.version>2.7.2</spring-boot-starter-validation.version>
-        <common-utils.version>v0.0.5</common-utils.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <redisson-spring-boot-starter.version>3.21.3</redisson-spring-boot-starter.version>
+        <spring-boot-starter-validation.version>3.1.0</spring-boot-starter-validation.version>
+        <common-utils.version>v1.1.1</common-utils.version>
     </properties>
 
     <dependencies>

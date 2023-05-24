@@ -1,9 +1,8 @@
 package vip.mrtree.cache.interfact;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import vip.mrtree.utils.StringUtils;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * CacheHelper, define some cache APIs
@@ -28,7 +27,7 @@ public interface CacheHelper {
      *
      * @author wangyunshu
      */
-    void put(@NotBlank String cacheName, @NotBlank String key, @NotNull Object value, @NotNull long duration);
+    void put(@NotBlank String cacheName, @NotBlank String key, @NotNull Object value, long duration);
 
     /**
      * get cache

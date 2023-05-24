@@ -1,5 +1,7 @@
 package vip.mrtree.cache.redis;
 
+import jakarta.annotation.Resource;
+import jakarta.validation.constraints.NotNull;
 import org.redisson.api.RBucket;
 import org.redisson.api.RKeys;
 import org.redisson.api.RedissonClient;
@@ -8,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 import vip.mrtree.cache.interfact.CacheHelper;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -20,12 +21,12 @@ public class RedisHelper implements CacheHelper {
     private RedissonClient redissonClient;
 
     @Override
-    public void put(String cacheName, String key, Object value) {
+    public void put(String cacheName, String key, @NotNull Object value) {
         put(cacheName, key, value, DEFAULT_CACHE_CYCLE);
     }
 
     @Override
-    public void put(String cacheName, String key, Object value, long duration) {
+    public void put(String cacheName, String key, @NotNull Object value, long duration) {
         RBucket<Object> bucket = redissonClient.getBucket(generateCacheKey(cacheName, key));
         bucket.set(value, duration, TimeUnit.SECONDS);
     }
@@ -36,7 +37,7 @@ public class RedisHelper implements CacheHelper {
     }
 
     @Override
-    public <T> T get(String cacheName, String key, Class<T> tClass) {
+    public <T> T get(String cacheName, String key, @NotNull Class<T> tClass) {
         RBucket<T> bucket = redissonClient.getBucket(generateCacheKey(cacheName, key));
         return bucket.get();
     }
