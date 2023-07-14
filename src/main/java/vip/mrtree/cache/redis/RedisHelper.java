@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 import vip.mrtree.cache.interfact.CacheHelper;
+import vip.mrtree.utils.CollectionUtils;
 
 import java.time.Instant;
 import java.util.Set;
@@ -76,5 +77,20 @@ public class RedisHelper implements CacheHelper {
     @Override
     public Set<Object> getSet(String cacheName, String key) {
         return redissonClient.getSet(generateCacheKey(cacheName, key));
+    }
+
+    @Override
+    public Object getSetRandomItem(String cacheName, String key) {
+        Set<Object> set = getSet(cacheName, key);
+        if (CollectionUtils.isEmpty(set)) {
+            return null;
+        }
+        return ((RSet<Object>) set).random();
+    }
+
+    @Override
+    public void deleteSetItem(String cacheName, String key, Object value) {
+        RSet<Object> set = (RSet<Object>) getSet(cacheName, key);
+        set.remove(value);
     }
 }

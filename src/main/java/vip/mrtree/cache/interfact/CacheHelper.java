@@ -61,6 +61,10 @@ public interface CacheHelper {
 
     Set<Object> getSet(@NotBlank String cacheName, @NotBlank String key);
 
+    Object getSetRandomItem(@NotBlank String cacheName, @NotBlank String key);
+
+    void deleteSetItem(@NotBlank String cacheName, @NotBlank String key, Object value);
+
     /**
      * generate cache key
      * <br>

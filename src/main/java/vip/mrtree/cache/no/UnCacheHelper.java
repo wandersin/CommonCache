@@ -52,4 +52,14 @@ public class UnCacheHelper implements CacheHelper {
     public Set<Object> getSet(String cacheName, String key) {
         return null;
     }
+
+    @Override
+    public Object getSetRandomItem(String cacheName, String key) {
+        return null;
+    }
+
+    @Override
+    public void deleteSetItem(String cacheName, String key, Object value) {
+
+    }
 }
