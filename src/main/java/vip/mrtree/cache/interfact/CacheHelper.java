@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import vip.mrtree.utils.StringUtils;
 
+import java.util.Set;
+
 /**
  * CacheHelper, define some cache APIs
  * <br>
@@ -52,6 +54,12 @@ public interface CacheHelper {
      * @author wangyunshu
      */
     void remove(@NotBlank String cacheName, @NotBlank String key);
+
+    void addSet(@NotBlank String cacheName, @NotBlank String key, Object value);
+
+    void addSet(@NotBlank String cacheName, @NotBlank String key, Object value, long second);
+
+    Set<Object> getSet(@NotBlank String cacheName, @NotBlank String key);
 
     /**
      * generate cache key

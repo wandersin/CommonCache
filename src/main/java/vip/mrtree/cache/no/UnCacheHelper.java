@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 import vip.mrtree.cache.interfact.CacheHelper;
 
+import java.util.Set;
+
 @Component
 @Qualifier("cacheHelper")
 @ConditionalOnExpression("!${cache.switch:false}")
@@ -34,5 +36,20 @@ public class UnCacheHelper implements CacheHelper {
     @Override
     public void remove(String cacheName, String key) {
 
+    }
+
+    @Override
+    public void addSet(String cacheName, String key, Object value) {
+
+    }
+
+    @Override
+    public void addSet(String cacheName, String key, Object value, long second) {
+
+    }
+
+    @Override
+    public Set<Object> getSet(String cacheName, String key) {
+        return null;
     }
 }
