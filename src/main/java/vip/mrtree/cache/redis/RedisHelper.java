@@ -40,7 +40,11 @@ public class RedisHelper implements CacheHelper {
     @Override
     public void put(String cacheName, String key, @NotNull Object value, long duration) {
         RBucket<Object> bucket = redissonClient.getBucket(generateCacheKey(cacheName, key));
-        bucket.set(value, duration, TimeUnit.SECONDS);
+        if (duration > 0) {
+            bucket.set(value, duration, TimeUnit.SECONDS);
+        } else {
+            bucket.set(value);
+        }
     }
 
     @Override
