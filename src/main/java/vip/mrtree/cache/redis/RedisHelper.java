@@ -108,7 +108,7 @@ public class RedisHelper implements CacheHelper {
      * @author wangyunshu
      */
     public RLock getLock(String key) {
-        return redissonClient.getLock(key);
+        return redissonClient.getLock(generateCacheKey("REDISSON_LOCK", key));
     }
 
     /**
