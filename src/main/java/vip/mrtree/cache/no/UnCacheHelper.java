@@ -39,27 +39,32 @@ public class UnCacheHelper implements CacheHelper {
     }
 
     @Override
-    public void addSet(String cacheName, String key, Object value) {
+    public void addSet(String cacheName, String key, String value) {
 
     }
 
     @Override
-    public void addSet(String cacheName, String key, Object value, long second) {
+    public void addSet(String cacheName, String key, String value, long second) {
 
     }
 
     @Override
-    public Set<Object> getSet(String cacheName, String key) {
+    public Set<String> getSet(String cacheName, String key) {
         return null;
     }
 
     @Override
-    public Object getSetRandomItem(String cacheName, String key) {
+    public String getSetRandomItem(String cacheName, String key) {
         return null;
     }
 
     @Override
-    public void deleteSetItem(String cacheName, String key, Object value) {
+    public void deleteSetItem(String cacheName, String key, String value) {
 
+    }
+
+    @Override
+    public boolean contains(String cacheName, String key, @NotNull String value) {
+        return false;
     }
 }

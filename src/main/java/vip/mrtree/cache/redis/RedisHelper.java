@@ -2,10 +2,7 @@ package vip.mrtree.cache.redis;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
-import org.redisson.api.RBucket;
-import org.redisson.api.RKeys;
-import org.redisson.api.RSet;
-import org.redisson.api.RedissonClient;
+import org.redisson.api.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
@@ -65,13 +62,13 @@ public class RedisHelper implements CacheHelper {
     }
 
     @Override
-    public void addSet(String cacheName, String key, Object value) {
+    public void addSet(String cacheName, String key, String value) {
         addSet(cacheName, key, value, 0);
     }
 
     @Override
-    public void addSet(String cacheName, String key, Object value, long second) {
-        RSet<Object> set = redissonClient.getSet(generateCacheKey(cacheName, key));
+    public void addSet(String cacheName, String key, String value, long second) {
+        RSet<String> set = redissonClient.getSet(generateCacheKey(cacheName, key));
         set.add(value);
         if (second > 0) {
             set.expire(Instant.now().plusSeconds(second));
@@ -79,22 +76,53 @@ public class RedisHelper implements CacheHelper {
     }
 
     @Override
-    public Set<Object> getSet(String cacheName, String key) {
-        return redissonClient.getSet(generateCacheKey(cacheName, key));
+    public Set<String> getSet(String cacheName, String key) {
+        RSet<String> set = redissonClient.getSet(generateCacheKey(cacheName, key));
+        return set.readAll();
     }
 
     @Override
-    public Object getSetRandomItem(String cacheName, String key) {
-        Set<Object> set = getSet(cacheName, key);
+    public String getSetRandomItem(String cacheName, String key) {
+        Set<String> set = getSet(cacheName, key);
         if (CollectionUtils.isEmpty(set)) {
             return null;
         }
-        return ((RSet<Object>) set).random();
+        return ((RSet<String>) set).random();
     }
 
     @Override
-    public void deleteSetItem(String cacheName, String key, Object value) {
-        RSet<Object> set = (RSet<Object>) getSet(cacheName, key);
+    public void deleteSetItem(String cacheName, String key, String value) {
+        RSet<String> set = redissonClient.getSet(generateCacheKey(cacheName, key));
         set.remove(value);
+    }
+
+    @Override
+    public boolean contains(String cacheName, String key, @NotNull String value) {
+        return getSet(cacheName, key).contains(value);
+    }
+
+    /**
+     * 获取Redis分布式锁
+     * <br>
+     *
+     * @author wangyunshu
+     */
+    public RLock getLock(String key) {
+        return redissonClient.getLock(key);
+    }
+
+    /**
+     * 解锁
+     * <br>
+     *
+     * @author wangyunshu
+     */
+    public void unlock(RLock lock) {
+        if (lock == null) {
+            return;
+        }
+        if (lock.isLocked()) {
+            lock.unlock();
+        }
     }
 }

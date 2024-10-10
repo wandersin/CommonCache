@@ -55,15 +55,23 @@ public interface CacheHelper {
      */
     void remove(@NotBlank String cacheName, @NotBlank String key);
 
-    void addSet(@NotBlank String cacheName, @NotBlank String key, Object value);
+    void addSet(@NotBlank String cacheName, @NotBlank String key, String value);
 
-    void addSet(@NotBlank String cacheName, @NotBlank String key, Object value, long second);
+    void addSet(@NotBlank String cacheName, @NotBlank String key, String value, long second);
 
-    Set<Object> getSet(@NotBlank String cacheName, @NotBlank String key);
+    /**
+     * get set all elements
+     * <br>
+     *
+     * @author wangyunshu
+     */
+    Set<String> getSet(@NotBlank String cacheName, @NotBlank String key);
 
-    Object getSetRandomItem(@NotBlank String cacheName, @NotBlank String key);
+    String getSetRandomItem(@NotBlank String cacheName, @NotBlank String key);
 
-    void deleteSetItem(@NotBlank String cacheName, @NotBlank String key, Object value);
+    void deleteSetItem(@NotBlank String cacheName, @NotBlank String key, String value);
+
+    boolean contains(@NotBlank String cacheName, @NotBlank String key, @NotNull String value);
 
     /**
      * generate cache key
