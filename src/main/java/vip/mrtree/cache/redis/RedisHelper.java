@@ -63,7 +63,7 @@ public class RedisHelper implements CacheHelper {
 
     @Override
     public void addSet(String cacheName, String key, String value) {
-        addSet(cacheName, key, value, 0);
+        addSet(cacheName, key, value, DEFAULT_CACHE_CYCLE);
     }
 
     @Override
