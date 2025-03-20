@@ -41,13 +41,9 @@
 
     <distributionManagement>
         <repository>
-            <id>local-release</id>
-            <url>https://packages.aliyun.com/5f3658dcd24814603933a475/maven/local-release</url>
+            <id>maven-local</id>
+            <url>https://artifactory.mrtree.vip:8443/artifactory/maven-local/</url>
         </repository>
-        <snapshotRepository>
-            <id>local-snapshot</id>
-            <url>https://packages.aliyun.com/5f3658dcd24814603933a475/maven/local-snapshot</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <build>
